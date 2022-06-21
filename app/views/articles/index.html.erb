@@ -1,11 +1,24 @@
 <h1>All Articles</h1>
 
-<ul>
+<table>
+  <tr>
+    <th>Articles</th>
+    <th>Actions</th>
+  </tr>
     <% @articles.each do |article| %>
-      <li>
+    <tr>
+      <td>
         <%= link_to article.title, article %>
-      </li>
+      </td>
+      <td>
+        <%= link_to "Edit", edit_article_path(article) %>
+        <%= link_to "Delete", article_path(article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+      </td>
+    </tr>
     <% end %>
-</ul>
-
+</table>
+<br/>
 <%= link_to "New Article", new_article_path %>
