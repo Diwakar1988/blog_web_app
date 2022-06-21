@@ -1,23 +1,25 @@
 <h1>All Articles</h1>
-
+Our blog has <%= Article.public_count %> articles and counting!
 <table>
   <tr>
     <th>Articles</th>
     <th>Actions</th>
   </tr>
     <% @articles.each do |article| %>
-    <tr>
-      <td>
-        <%= link_to article.title, article %>
-      </td>
-      <td>
-        <%= link_to "Edit", edit_article_path(article) %>
-        <%= link_to "Delete", article_path(article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %>
-      </td>
-    </tr>
+      <% unless article.archived? %>
+        <tr>
+          <td>
+            <%= link_to article.title, article %>
+          </td>
+          <td>
+            <%= link_to "Edit", edit_article_path(article) %>
+            <%= link_to "Delete", article_path(article), data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"
+                      } %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
 </table>
 <br/>
